@@ -246,11 +246,6 @@ def train(input_tensor, target_tensor, encoder, decoder, encoder_optimizer, deco
     encoder_optimizer.step()
     decoder_optimizer.step()
 
-    print "train done !"
-
-    torch.save(encoder, 'model/encoder.pt')
-    torch.save(decoder, 'model/decoder.pt')
-
     return loss.item() / target_length
 
 def trainIters(encoder, decoder, n_iters, print_every=1000, plot_every=100, learning_rate=0.01):
@@ -287,6 +282,11 @@ def trainIters(encoder, decoder, n_iters, print_every=1000, plot_every=100, lear
             plot_loss_total = 0
 
     # showPlot(plot_losses)
+    print "train done !"
+
+    torch.save(encoder, 'model/encoder.pt')
+    torch.save(decoder, 'model/decoder.pt')
+
 
 def showPlot(points):
     plt.figure()
@@ -370,32 +370,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
