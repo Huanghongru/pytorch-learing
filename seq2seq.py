@@ -108,7 +108,6 @@ def prepareData(lang1, lang2, reverse=False):
     print output_lang.name, output_lang.n_words
     return input_lang, output_lang, pairs
 
-input_lang, output_lang, pairs = prepareData('eng', 'fra', True)
 
 class EncoderRNN(nn.Module):
     def __init__(self, input_size, hidden_size):
@@ -360,6 +359,7 @@ def evaluateRandomly(encoder, decoder, n=10):
 
 
 def main():
+    input_lang, output_lang, pairs = prepareData('eng', 'fra', True)
     print random.choice(pairs)
 
     hidden_size = 256
