@@ -344,14 +344,16 @@ def evaluate(encoder, decoder, sentence, max_length=MAX_LENGTH, trained=False):
             else:
                 decoded_words.append(output_lang.index2word[topi.item()])
 
-        return decoded_words, ecoder_attentions[:di+1]
+            decoder_input = topi.squeeze().detach()
+
+        return decoded_words, decoder_attentions[:di+1]
 
 def evaluateRandomly(encoder, decoder, n=10):
     for i in range(n):
         pair = random.choice(pairs)
         print '>', pair[0]
         print '=', pair[1]
-        output_words, attentions = evaluate(encoder, decoder, pair[0])
+        output_words, attentions = evaluate(encoder, decoder, pair[0], trained=True)
         output_sentence = ' '.join(output_words)
         print '<', output_sentence
         print 
@@ -364,7 +366,7 @@ def main():
     encoder1 = EncoderRNN(input_lang.n_words, hidden_size).to(device)
     attn_decoder1 = AttnDecoderRNN(hidden_size, output_lang.n_words, dropout_p=0.1).to(device)
 
-    trainIters(encoder1, attn_decoder1, 75000, print_every=5000)
+    # trainIters(encoder1, attn_decoder1, 75000, print_every=5000)
 
     evaluateRandomly(encoder1, attn_decoder1)
 
