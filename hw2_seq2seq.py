@@ -112,6 +112,8 @@ input_lang, output_lang, pairs = prepareData('eng', 'fra', True)
 
 def load_pretrained_embedding(lang, w2v_file):
     data, w2v = {}, []
+
+    # add two special token EOS and SOS
     w2v.append(np.random.rand(300).tolist())
     w2v.append(np.random.rand(300).tolist())
     lines = open(w2v_file, 'r').readlines()
